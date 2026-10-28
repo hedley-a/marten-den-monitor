@@ -103,7 +103,7 @@ Data - over one year of storage - download by Bluetooth
 
 ![grafik](https://github.com/hedley-a/Marten-Logger-BLE/blob/main/images/DenboxDrg.png)  
 
-![grafik](https://github.com/hedley-a/Marten-Logger-BLE/blob/main/images/Probes.png) 
+![grafik](https://github.com/hedley-a/Marten-Logger-BLE/blob/main/images/ProbeLocn.png) 
 
 ## Development
 - Development: box containing 'dummy marten' to optimise probe location and evaluate data.
