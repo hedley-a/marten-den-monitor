@@ -72,17 +72,18 @@ Keeping hardware as simple as possible limits logging memory
 - Daily Memory Use	576 bytes
 - Logger duration	455 days (~15 months / 1.25 years)
 
-- The battery data will be coded over a temporal bit stream 5 log entries to assemble.
-- 1-4 Volts at 0.1 Volt resolution
+- The battery data will be coded over a temporal bit stream 5 log entries.
+- 1-4 Volts at 0.1 Volt resolution, refresh every 50 minutes.    
  
 ### Recommendations
- Differential temperature storage is the key to storing data efficiently.
+ Differential temperature storage is the key to sdata efficiently.
 - Continuous logging provides sufficient storage duration whilst simplifying software.
 - There is a risk with triggering that events are missed or spurious data recorded.
-- it is expected that using temperature analysis to determine box occupancy may become unreliable during periods of high ambient temperature.   
+- **'Confidence factor'** Derived from of change of temperature and absolute difference coded with care.
+- Temperature analysis to determine box occupancy may become unreliable during periods of high ambient temperature.   
 ### Risks
 - nRF52 development kit for debugging / programming  - working, tested
-- There is a plenty of boiler-plate code and the device is IMO *'just right for the job'*
+- Plenty of boiler-plate code and the device is IMO *'just right for the job'*
 - 'Hello world' BLE (bluetooth low energy) connection with Nordic smartphone APP - tested
 - IANAE but with a bit of help (not all, hopefully from AI) this project should be do-able.
 
@@ -101,11 +102,16 @@ Probe/logger assembly robust, simple to deploy and service.
 Data - one year of storage - download by Bluetooth 
 ![grafik](https://github.com/hedley-a/Marten-Logger-BLE/blob/main/images/DenboxProbes.png)  
 
+## Development
+- Develpment: box containing 'dummy marten' to optimise probe location and evaluate data.
+## [Dummy Marten evaluation]
+
 ## [Box modification drawing](https://github.com/hedley-a/Marten-Logger-BLE/blob/main/monitor_box.pdf)
 
 ## [Circuit diagram](https://github.com/hedley-a/Marten-Logger-BLE/blob/main/schematic_dbl.pdf)
 
-## Development
+
+
 
 
 
