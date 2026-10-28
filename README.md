@@ -1,5 +1,5 @@
-## Marten den box temperature and occupancylogger
-- Objectives: A low cost, reliable and easy to depoly device
+## Marten den box temperature and occupancy logger
+- Objectives: Low cost, reliable and easy to depoly.
 - Improve the method of detecting occupancy used in the North American Joyce study
 
 ![grafik](https://github.com/hedley-a/Marten-Logger-BLE/blob/main/images/DenBox_front.jpg)
