@@ -100,9 +100,10 @@ Keeping hardware as simple as possible limits logging memory
 Two 3 mm holes drilled into the base of the box on either side of one internal nest-box baffle
 Probe/logger assembly robust, simple to deploy and service.  
 Data - over one year of storage - download by Bluetooth 
-![grafik](https://github.com/hedley-a/Marten-Logger-BLE/blob/main/images/ProbesDrg.png)  
 
-![grafik](https://github.com/hedley-a/Marten-Logger-BLE/blob/main/images/DenboxProbes.png) 
+![grafik](https://github.com/hedley-a/Marten-Logger-BLE/blob/main/images/DenboxDrg.png)  
+
+![grafik](https://github.com/hedley-a/Marten-Logger-BLE/blob/main/images/Probes.png) 
 
 ## Development
 - Development: box containing 'dummy marten' to optimise probe location and evaluate data.
