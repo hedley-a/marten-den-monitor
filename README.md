@@ -74,8 +74,7 @@ Keeping hardware as simple as possible limits logging memory
 
 - The battery data will be coded over a temporal bit stream 5 log entries to assemble.
 - 1-4 Volts at 0.1 Volt resolution
-
-- 
+ 
 ### Recommendations
  Differential temperature storage is the key to storing data efficiently.
 - Continuous logging provides sufficient storage duration whilst simplifying software.
@@ -88,17 +87,16 @@ Keeping hardware as simple as possible limits logging memory
 - IANAE but with a bit of help (not all, hopefully from AI) this project should be do-able.
 
 ### Design constraints:
-- **EEPROM memory** is cheap, low power, easy to integrate but with limited capacity.  
-- SD cards offer capacity but come with low power low Voltage problems:  
-- [thecavepearlproject.org/2017/05/21/switching-off-sd-cards-for-low-power-data-logging/](https://thecavepearlproject.org/2017/05/21/switching-off-sd-cards-for-low-power-data-logging/)
+- **EEPROM memory** is cheap, low power, easy to integrate, limited capacity.  
 - EEPROM requires remote download - adds to design complexity but advantage for users.
-- In principle 6*512KBit EEPROMS could be addressed by one nRF52 device (3KBit of memory). 
+- In principle 8*512KBit EEPROMS could be addressed by one nRF52 device (4KBit of memory). 
 -**Lithium/Iron Disulfide battery** (AAA Size * 2)
 - 1 Ah capacity 1.4 Watt/hours * 2  - 2.4 Watt/hours
 - Stable voltage matched to nRF52 and memory modules
+- Predicted life 3-4 years
    
 ### Deployment:
-Two 6 mm holes drilled into the base of the box on either side of one internal nest-box baffle
+Two 3 mm holes drilled into the base of the box on either side of one internal nest-box baffle
 Probe/logger assembly robust, simple to deploy and service.  
 Data - one year of storage - download by Bluetooth 
 ![grafik](https://github.com/hedley-a/Marten-Logger-BLE/blob/main/images/DenboxProbes.png)  
@@ -107,12 +105,8 @@ Data - one year of storage - download by Bluetooth
 
 ## [Circuit diagram](https://github.com/hedley-a/Marten-Logger-BLE/blob/main/schematic_dbl.pdf)
 
-##Further Design options
--- Does require custom hardware / software.
-## Radar sensing
-- Evaluation of the LD2410S shows promise
-- Configurable range and sensitivity
-- Low power 40 - 120 microamps - 3.0 - 3.6 Volts.
+## Development
+
 
 
 
