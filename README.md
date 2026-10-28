@@ -20,16 +20,17 @@ The methodology is explained in detail within the paper.
 
 ## Proposed Improvement
 A custom built logger running our own firmware designed for easy deployment
-### data recovery
+### 
+### Data recovery
 - Data downloadable using bluetooth [BLE] to mobile device
 - Ground level access, no animal disturbance.
 - Commercial BLE loggers are available, cost is prohibitive.
   
 ### logged parameters
-- **Temperature** outside and inside den box every 15 minutes
-- This could be a single point in time, or oversampled to give trend, maximum or minimum
-- **Occupancy Trigger** oversampled data pre-processed flagging occupancy temperature signature
-- determined using  Δ $\Delta$ Temperature   - Defaults to be determined by experiment and field reconfigurable
+- **Temperature** outside and inside den box every 5 minutes
+- This could be a single point in time, or oversampled +/- trend, maximum or minimum
+- **Occupancy Trigger** oversampled data processed then flag occupancy using Δ $\Delta$ temperature signature
+- Default to be determined by experiment and then made field reconfigurable
 - **Differential temperature**
 - Two identical temperature probes, in the den and entrance, gives an accurate difference and occupancy trigger compensation for enviromental changes
 - rejecting common mode change: e.g sunlight on box.    
