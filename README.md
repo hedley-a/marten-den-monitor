@@ -39,7 +39,7 @@ A custom built logger running our own firmware designed for easy deployment
 
 ## Hardware
 - Nordic Semiconductor NRF52832 processor module with Bluetooth [BLE]
-- kilobit - 256 Kilobytes of EEPROM memory (4 x CAT24C512)  
+- 256 Kilobytes of EEPROM memory (4 x CAT24C512)  
 - Passive NTC thermistor differential bridge internal temperature sensors  
 - SHT41 Temperature sensor (mounted within bottom box)
 - ABS box
