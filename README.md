@@ -18,7 +18,7 @@ Temperatures were sampled every 5 minutes over 4 months.
 Potential use by an animal was identified by searching for temperature changes using **absolute den temperature data only**  
 The methodology is explained in detail within the paper.  
 
-## Proposed Improvements
+## Proposed Improvement
 A custom built logger running our own firmware designed for easy deployment
 ### data recovery
 - Data downloadable using bluetooth [BLE] to mobile device
