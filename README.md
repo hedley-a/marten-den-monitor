@@ -1,10 +1,10 @@
-# Marten den box logger
+## Marten den box temperature and occupancylogger
+- Objectives: A low cost, reliable and easy to depoly device
+- Improve the method of detecting occupancy used in the North American Joyce study
+
 ![grafik](https://github.com/hedley-a/Marten-Logger-BLE/blob/main/images/DenBox_front.jpg)
 ## Marten box inside view
 ![grafik](https://github.com/hedley-a/Marten-Logger-BLE/blob/main/images/DenBox_interior.jpg)
-
-- Objectives: A low cost, reliable and easy to use logging device
-- Improve the method of detecting occupancy used in the North American Joyce study 
   
 ## [Joyce Study](https://stacksjournal.org/wp-content/uploads/2025/06/Joyce-25003-Article.pdf)
    _"Each den box had an internal temperature logger (HOBO® UA-001-64
@@ -18,46 +18,41 @@ Temperatures were sampled every 5 minutes over 4 months.
 Potential use by an animal was identified by searching for temperature changes using **absolute den temperature data only**  
 The methodology is explained in detail within the paper.  
 
-## Differential measurement
-The Joyce study did not use differential measurement due to the cost and complexity of deploying two commercial loggers.    
-Comparing the temperature in the nest-box with the entrance area in our case is simple and cheap and has significant advantages.  
-
-# Improvements
-## Temperature (only) logging  
-- Differential measurement rejects common mode change: e.g sunlight on box, diurnal and seasonal.      
-- Reduces the amount of data with consequential cost and power consumption savings within the logger.
-- Less data to recover, analyse and discard post download.   
-- Does require custom hardware / software.
-## Radar sensing
-- Evaluation of the LD2410S shows promise
-- Configurable range and sensitivity
-- Low power 40 - 120 microamps - 3.0 - 3.6 Volts.
+## Proposed Improvements
+A custom built logger running our own firmware designed for easy deployment
+### data recovery
+- Data downloadable using bluetooth [BLE] to mobile device
+- Ground level access, no animal disturbance.
+- Commercial BLE loggers are available, cost is prohibitive.
+  
+### logged parameters
+- **Temperature** outside and inside den box every 15 minutes
+- This could be a single point in time, or oversampled to give trend, maximum or minimum
+- **Occupancy Trigger** oversampled data pre-processed flagging occupancy temperature signature
+- determined using  Δ $\Delta$ Temperature   - Defaults to be determined by experiment and field reconfigurable
+- **Differential temperature**
+- Two identical temperature probes, in the den and entrance, gives an accurate difference and occupancy trigger compensation for enviromental changes
+- rejecting common mode change: e.g sunlight on box.    
+- in a custom design this is simple to implement.
+- Reduces the amount of data stored: Logger cost and power consumption savings.
+- Less data to recover, analyse and discard post download.
 
 ## Hardware
-- Nordic Semiconductor NRF52832 Bluetooth Module BLE 4.2 Low Power Bluetooth module
-- 1024kilobit  - 128 Kilobytes of EEPROM memory (2 x CAT24C512)  
-- Passive NTC thermistor differential bridge temperature sensors  
-- SHT41 Temperature and *Humidity!* sensor(external environment)
+- Nordic Semiconductor NRF52832 processor module with Bluetooth [BLE]
+- 1024kilobit - 256 Kilobytes of EEPROM memory (4 x CAT24C512)  
+- Passive NTC thermistor differential bridge internal temperature sensors  
+- SHT41 Temperature sensor (mounted within bottom box)
 - ABS box
-- Stainless Steel immersion sleeves
+- 3 mm diameter stainless steel sensor sleeves
 - 2 AAA Lithium iron disulphide cells and holder
-- Hand wired
-- Approx £25-30 as prototype, cheaper in quantity.
+- Approx £35 as hand built prototype, maybe cheaper in quantity.
   
 ### Data Storage:
 1024k of EEPROM memory 131,072 Bytes
-#### Triggered logging
-- Assume four daily occupancy events where differential probe temperature triggers detailed recording.
-- Each event record could be up to one hour at 2 minute sampling: 30 readings of +/- 12°C diff @ 0.1°C resolution.
-- **120 bytes/day**
-- Environmental monitoring - every four hours:  Internal, External Max/Min temperatures @ 1°C resolution
-- **24 bytes/day**
-- Append a 4-byte epoch timestamp to every regular log and random event,
-- daily consumption **184 bytes**
-- Capacity:  **712 days** before oldest data overwritten
 
-#### Continuous logging
-- Increase logging interval to five minutes
+#### Memory Budget
+Keeping hardware as simple as possible requres 
+- Logging interval five minutes
 - Reduce data to one byte - just the +/- 12°C diff @ 0.1°C resolution.
 - **288 bytes/Day**
 - Environmental monitoring - every four hours:  Internal, External Max/ Min @ 1°C resolution
@@ -95,6 +90,13 @@ Data - one year of storage - download by Bluetooth
 ## [Box modification drawing](https://github.com/hedley-a/Marten-Logger-BLE/blob/main/monitor_box.pdf)
 
 ## [Circuit diagram](https://github.com/hedley-a/Marten-Logger-BLE/blob/main/schematic_dbl.pdf)
+
+##Further Design options
+-- Does require custom hardware / software.
+## Radar sensing
+- Evaluation of the LD2410S shows promise
+- Configurable range and sensitivity
+- Low power 40 - 120 microamps - 3.0 - 3.6 Volts.
 
 
 
