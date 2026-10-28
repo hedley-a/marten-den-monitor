@@ -27,8 +27,7 @@ A custom built logger running our own firmware designed for easy deployment
 - Commercial BLE loggers are available, cost is prohibitive.
   
 ### logged parameters
-- **Temperature** outside and inside den box every 5 minutes
-- This could be a single point in time, or oversampled +/- trend, maximum or minimum
+- **Temperature** outside and inside den box every 10 minutes
 - **Occupancy** Flag using $\Delta$ temperature signature
 - Default $\Delta$ temperature\time determined by experiment and field reconfigurable
 - **Differential temperature**
@@ -61,21 +60,22 @@ Keeping hardware as simple as possible limits logging memory
 
 | Variable              | Bits | Integer Range | True Value Range (0.1°C Res) |
 | ----------------------|------|---------------|------------------------------|
-|Temp 1 (Absolute)      |	10   |	0-1023       | -40.0°C to +62.3°C | 
-|Temp 2 (Offset from T1)|	8		 |  0-253        | -25.6°C to +25.5°C rel to t1 |
-|Temp 3 (Offset from T1)|	8		 |  0-253        | -.3°C to +25.5°C rel to t1   |
-|Battery Level          |	3	   |  0-7	         |  8 levels (e.g. 7 bars)      |
-|Occupancy confidence	  | 3	   |  0-7	         |  (0% to 100% in 14% steps)   |               
-Total	32		Exactly 4 Bytes  
+|Temp 1 (Absolute)      |	10   |	0-1023       | -40.0°C to +62.3°C           | 
+|Temp 2 (Offset from T1)|	9		 |  0-512        | -25.6°C to +25.5°C rel to t1 |
+|Temp 3 (Offset from T1)|	8		 |  0-253        | -12.8°C to +12.7°C rel to t1 |
+|Battery Level          |	1*	 |  0-1	         |  <temporal bit stream>       |
+|Occupancy confidence	  | 4	   |  0-15	       |  (0% to 100% in 7% steps)    |               
+|Total	32		Exactly 4 Bytes |  
 
--  
-- Reduce data to one byte - just the +/- 12°C diff @ 0.1°C resolution.
-- **288 bytes/Day**
-- Environmental monitoring - every four hours:  Internal, External Max/ Min @ 1°C resolution
-- **24 bytes/day**
-- No need for timestamps due to regularity.
-- **312 bytes/day**
-- **131,072/312 = 354 days(approx)**
+- Log Interval	Every 10 minutes
+- Entries per Day	144 entries
+- Daily Memory Use	576 bytes
+- Logger duration	455 days (~15 months / 1.25 years)
+
+- The battery data will be coded over a temporal bit stream 5 log entries to assemble.
+- 1-4 Volts at 0.1 Volt resolution
+
+- 
 ### Recommendations
  Differential temperature storage is the key to storing data efficiently.
 - Continuous logging provides sufficient storage duration whilst simplifying software.
