@@ -111,7 +111,7 @@ Data - over one year of storage - download by Bluetooth
 
 ## [Box modification drawing](https://github.com/hedley-a/Marten-Logger-BLE/blob/main/MonitorBox.pdf)
 
-## [Circuit diagram](https://github.com/hedley-a/Marten-Logger-BLE/blob/main/schematic_dbl.pdf)
+## [Circuit diagram](https://github.com/hedley-a/Marten-Logger-BLE/blob/main/Schematic_Den-Box-Logger_2026-10-28.pdf)
 
 
 
