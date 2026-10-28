@@ -29,18 +29,18 @@ A custom built logger running our own firmware designed for easy deployment
 ### logged parameters
 - **Temperature** outside and inside den box every 5 minutes
 - This could be a single point in time, or oversampled +/- trend, maximum or minimum
-- **Occupancy Trigger** oversampled data processed then flag occupancy using Δ $\Delta$ temperature signature
-- Default to be determined by experiment and then made field reconfigurable
+- **Occupancy** Flag using $\Delta$ temperature signature
+- Default $\Delta$ temperature\time determined by experiment and field reconfigurable
 - **Differential temperature**
 - Two identical temperature probes, in the den and entrance, gives an accurate difference and occupancy trigger compensation for enviromental changes
-- rejecting common mode change: e.g sunlight on box.    
-- in a custom design this is simple to implement.
+- Reject common mode changes: e.g sunlight on box.    
+- With custom design this is simple to implement.
 - Reduces the amount of data stored: Logger cost and power consumption savings.
 - Less data to recover, analyse and discard post download.
 
 ## Hardware
 - Nordic Semiconductor NRF52832 processor module with Bluetooth [BLE]
-- 1024kilobit - 256 Kilobytes of EEPROM memory (4 x CAT24C512)  
+- kilobit - 256 Kilobytes of EEPROM memory (4 x CAT24C512)  
 - Passive NTC thermistor differential bridge internal temperature sensors  
 - SHT41 Temperature sensor (mounted within bottom box)
 - ABS box
@@ -52,8 +52,23 @@ A custom built logger running our own firmware designed for easy deployment
 1024k of EEPROM memory 131,072 Bytes
 
 #### Memory Budget
-Keeping hardware as simple as possible requres 
-- Logging interval five minutes
+Keeping hardware as simple as possible limits logging memory
+• CAT24C512 capacity: 512 Kilobits = 64 Kilobytes (KB) = 65,536 bytes per chip.
+• Total Capacity (4 chips): 4 × 65,536 = 262,144 bytes.
+**What and for how long ? ...**  
+- Logging interval five minutes - arbitary - may be changed.
+-  32-Bit Memory Map 4 Bytes - makes page allocation easy in software  
+
+| Variable              | Bits | Integer Range | True Value Range (0.1°C Res) |
+| ----------------------|------|---------------|------------------------------|
+|Temp 1 (Absolute)      |	10   |	0-1023       | -40.0°C to +62.3°C | 
+|Temp 2 (Offset from T1)|	8		 |  0-253        | -25.6°C to +25.5°C rel to t1 |
+|Temp 3 (Offset from T1)|	8		 |  0-253        | -.3°C to +25.5°C rel to t1   |
+|Battery Level          |	3	   |  0-7	         |  8 levels (e.g. 7 bars)      |
+|Occupancy confidence	  | 3	   |  0-7	         |  (0% to 100% in 14% steps)   |               
+Total	32		Exactly 4 Bytes  
+
+-  
 - Reduce data to one byte - just the +/- 12°C diff @ 0.1°C resolution.
 - **288 bytes/Day**
 - Environmental monitoring - every four hours:  Internal, External Max/ Min @ 1°C resolution
