@@ -48,6 +48,27 @@ This prevents drift errors if sensor reading or SD/BLE logging takes a few extra
 automatically puts the CPU into low-power sleep mode between samples. 
 
 ### 3. Integer-Only C++ Implementation
+Adding two 6-bit temperature deltas (11 + 6 + 6 = 23 bits) leaves 9 bits for Z, packing all four values into a single 32-bit (uint32_t, 4-byte) flash record.  
+Using 6 signed bits per delta gives a range of -32 °C to +31 °C.
+
+1. 32-Bit Record Layout (uint32_t)  
+
+Packing sample into a standard 4-byte word aligns with flash memory pages on the Seeed nRF52:  
+
+|Field	             |Bits	    |Bit    |Resolution	     |Encoded Range                                                |
+|--------------------|----------|-------|----------------|-------------------------------------------------------------|
+T1 (Primary Temp)    |	11 bits	|0 – 10	|0.1 °C          |	-40.0 °C to +60.0 °C (stored as 0 to 1000 with +400 offset)|
+ΔT2 (T2 - T1)        |	6 bits	|11 – 16|	1 °C         |	-32 °C to +31 °C (signed two's complement)|
+ΔT3 (T3 - T1)        |	6 bits	|17 – 22|	1 °C         |	-32 °C to +31 °C (signed two's complement)|
+Z_scaled (2nd Deriv) |	9 bits	|23 – 31|	0.025 °C/min²|	-6.400 to +6.375 °C/min² (-256 to +255 raw)|
+
+• Wider Z Range Option: If your cavity experiences thermal shocks faster than ±6.4 °C/min², you can either divide Z_scaled by 2 (0.05 °C/min² steps, giving ±12.8 °C/min² in 9 bits) or use a 5-byte (40-bit) struct to give Z 17 bits.
+• Timestamp Alignment: Because Z is centred 2 minutes behind the current sample, T2 and T3 must also be buffered in 5-sample arrays so all four packed values come from the exact same minute (t - 2 min).
+
+2. C++ Bit-Packing & Unpacking Code
+
+This sketch buffers all three sensors, rounds the 0.1 °C differences to the nearest 1 °C, clamps every value so an out-of-range reading never corrupts neighbouring bits, and packs the record into one uint32_t:
+
 
 ```
     #include <Arduino.h>
