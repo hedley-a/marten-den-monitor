@@ -49,8 +49,7 @@ automatically puts the CPU into low-power sleep mode between samples.
 
 ### 3. Integer-Only C++ Implementation
 
-```
-#include <Arduino.h>
+```#include <Arduino.h>
 
 const unsigned long SAMPLE_INTERVAL_MS = 60000UL;
 unsigned long lastSampleTime = 0;
@@ -171,9 +170,7 @@ void loop() {
                     packed, t1, t2, t3, z);
     }
   }
-}
-
-```
+}```
 
 
 
