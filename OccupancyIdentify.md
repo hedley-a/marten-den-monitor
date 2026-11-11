@@ -33,3 +33,14 @@ where:
 * $t_{i-1}$ is the time at the previous time interval.
 
 Equation 2 minimizes variability in $R$ over time, which further helps distinguish sudden changes in temperature.
+
+##Coding
+Log three temperatures - The occupancy sensor -40 to +60 deg.C @ 0.1 deg.C resolution
+Two differences ambient and top 
+
+Use fixed-point integer math (int16_t or int32_t) for logging to flash: saves storage space, prevents rounding drift, and executes faster on the nRF52.
+
+• Actual Elapsed Time (t_min): Instead of assuming the denominator is always exactly 2.0 minutes, the code divides millis() by 60000.0f. 
+This prevents drift errors if sensor reading or SD/BLE logging takes a few extra milliseconds.
+• Denominator Alignment for \(Z_{i}\): Because \(R[2]\) is centred at \(t_{min}[3]\) and \(R[0]\) is centred at \(t_{min}[1]\), Equation 2 divides R[2] - R[0] by t_min[3] - t_min[1] (which is ~2 minutes).
+• Power Saving Tip: For battery-powered logging on the Seeed XIAO nRF52840, you can replace the millis() polling loop with delay(60000)—on the nRF52 mbed/Adafruit core, delay() automatically puts the CPU into low-power sleep mode between samples.
