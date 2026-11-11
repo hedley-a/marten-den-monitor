@@ -58,9 +58,9 @@ Packing sample into a standard 4-byte word aligns with flash memory pages on the
 |Field	             |Bits	    |Bit    |Resolution	     |Encoded Range                                                |
 |--------------------|----------|-------|----------------|-------------------------------------------------------------|
 T1 (Primary Temp)    |	11 bits	|0 – 10	|0.1 °C          |	-40.0 °C to +60.0 °C (stored as 0 to 1000 with +400 offset)|
-ΔT2 (T2 - T1)        |	6 bits	|11 – 16|	1 °C         |	-32 °C to +31 °C (signed two's complement)|
-ΔT3 (T3 - T1)        |	6 bits	|17 – 22|	1 °C         |	-32 °C to +31 °C (signed two's complement)|
-Z_scaled (2nd Deriv) |	9 bits	|23 – 31|	0.025 °C/min²|	-6.400 to +6.375 °C/min² (-256 to +255 raw)|
+ΔT2 (T2 - T1)        |	6 bits	|11 – 16|	1 °C         |	-32 °C to +31 °C (signed two's complement)                 |
+ΔT3 (T3 - T1)        |	6 bits	|17 – 22|	1 °C         |	-32 °C to +31 °C (signed two's complement)                 |
+Z_scaled (2nd Deriv) |	9 bits	|23 – 31|	0.025 °C/min²|	-6.400 to +6.375 °C/min² (-256 to +255 raw)                |
 
 • Wider Z Range Option: If your cavity experiences thermal shocks faster than ±6.4 °C/min², you can either divide Z_scaled by 2 (0.05 °C/min² steps, giving ±12.8 °C/min² in 9 bits) or use a 5-byte (40-bit) struct to give Z 17 bits.
 • Timestamp Alignment: Because Z is centred 2 minutes behind the current sample, T2 and T3 must also be buffered in 5-sample arrays so all four packed values come from the exact same minute (t - 2 min).
