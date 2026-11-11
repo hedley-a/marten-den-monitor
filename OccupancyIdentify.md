@@ -1,6 +1,8 @@
 ## Temperature Derivative Equations
+The Joyce study used two rate of change equations to help distinguish  
+sudden changes in internal temperature from normal daily oscillations in temperature. 
 
-### 1. First Derivative: Rate of Temperature Change ($R_i$)
+### 1. First Derivative: Rate of Temperature Change
 
 Equation 1 calculates the difference in temperature over time:
 
