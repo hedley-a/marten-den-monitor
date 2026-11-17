@@ -34,6 +34,8 @@ where:
 
 Equation 2 minimizes variability in $R$ over time, which further helps distinguish sudden changes in temperature.
 
+In our test system these are 'DBP' teperatures: MQTT to AdafruitIO as r-der and z-der
+
 ##Coding
 Log three temperatures - The occupancy sensor -40 to +60 deg.C @ 0.1 deg.C resolution
 Two differences ambient and top 
